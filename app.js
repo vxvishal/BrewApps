@@ -61,8 +61,14 @@ bookRouter.get('/:id', (req, res) => {
     const { id } = req.params;
 
     getBook(id)
-        .then(book => book ? res.send(book) : res.status(404).send({ message: 'Book not found' }))
-        .catch(error => res.status(500).send({ message: 'Error fetching book' }));
+        .then(book => res.send(book))
+        .catch(error => {
+            if (error.message === 'Book not found') {
+                res.status(404).send({ message: 'Book not found' });
+            } else {
+                res.status(500).send({ message: 'Error updating book' });
+            }
+        });
 });
 
 //route to update a book's details by its ID
@@ -77,7 +83,13 @@ bookRouter.patch('/:id', (req, res) => {
 
     updateBook(id, updatedFields)
         .then(message => res.send(message))
-        .catch(error => res.status(500).send({ message: 'Error updating book' }));
+        .catch(error => {
+            if (error.message === 'Book not found') {
+                res.status(404).send({ message: 'Book not found' });
+            } else {
+                res.status(500).send({ message: 'Error updating book' });
+            }
+        });
 });
 
 //route to delete a book by its ID
@@ -86,7 +98,13 @@ bookRouter.delete('/:id', (req, res) => {
 
     deleteBook(id)
         .then(message => res.send(message))
-        .catch(error => res.status(500).send({ message: 'Error deleting book' }));
+        .catch(error => {
+            if (error.message === 'Book not found') {
+                res.status(404).send({ message: 'Book not found' });
+            } else {
+                res.status(500).send({ message: 'Error updating book' });
+            }
+        });
 });
 
 app.listen(5000, () => {

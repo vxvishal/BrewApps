@@ -48,20 +48,24 @@ const getBook = async (id) => {
         }
         return book;
     } catch (error) {
-        throw new Error('Error fetching book');
+        throw error;
     }
 };
 
 //update a book's details by its ID and return the success or error message
 const updateBook = async (id, updatedFields) => {
     try {
-        const book = await Book.findOneAndUpdate({ id: id }, updatedFields, { new: true });
+        // Check if the book exists
+        const book = await Book.findOne({ id: id });
         if (!book) {
             throw new Error('Book not found');
         }
+
+        // Update the book
+        const updatedBook = await Book.findOneAndUpdate({ id: id }, updatedFields, { new: true });
         return 'Book updated successfully';
     } catch (error) {
-        throw new Error('Error updating book');
+        throw error;
     }
 };
 
@@ -74,7 +78,7 @@ const deleteBook = async (id) => {
         }
         return 'Book deleted successfully';
     } catch (error) {
-        throw new Error('Error deleting book');
+        throw error;
     }
 }
 
