@@ -28,6 +28,6 @@ To set up and run the application locally, follow these steps:
     - **Data Privacy**: Data in the URL can be logged in server logs or browser history, or seen by anyone who has access to the URL. By putting data in the request body, we can better protect sensitive information.
     - **Cleaner URLs**: Keeping the data in the request body helps keep our URLs clean and readable, which can make the API easier to use and understand.
 
-    ## Deployment
+## Deployment
 
-    The application is deployed at [here](). You can access the API endpoints at this URL.
+The application is deployed [here](https://brewapps.vishalx.repl.co/). You can access the API endpoints at this URL.
